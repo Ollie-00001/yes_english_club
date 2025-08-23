@@ -1,7 +1,7 @@
 from django import forms
 from phonenumber_field.formfields import PhoneNumberField as FormPhoneNumberField
 from phonenumber_field.phonenumber import to_python
-from .models import Request, Review
+from .models import Request, Review, Service
 
 class RequestForm(forms.ModelForm):
     phone_number = FormPhoneNumberField(region='RU')
@@ -20,3 +20,8 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['client_name', 'text']
+
+class ServiceForm(forms.ModelForm):
+    class Meta:
+        model = Service
+        fields = ['title', 'description', 'price']

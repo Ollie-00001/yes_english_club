@@ -1,1 +1,19 @@
 {% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Реквизиты{% endblock %}
+
+{% block content %}
+    <h1>Мои услуги</h1>
+    <ul>
+        {% for service in services %}
+            <li>
+                <h2>{{ service.title }}</h2>
+                <p>{{ service.description }}</p>
+                <p>Цена: {{ service.price }} руб.</p>
+            </li>
+        {% empty %}
+            <li>Услуги не найдены.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
