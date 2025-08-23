@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Заявки{% endblock %}
+
+{% block content %}
+  <h1>Заявки</h1>
+  <ul>
+    {% for request in requests %}
+      <li>{{ request.client_name }} - {{ request.created_at }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
