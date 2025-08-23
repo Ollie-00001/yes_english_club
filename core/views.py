@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
-from .models import Request
+from .models import Request, Review
 from django.shortcuts import render
 
 class AboutView(TemplateView):
@@ -20,6 +20,10 @@ class RequestView(TemplateView):
 
 class ReviewsView(TemplateView):
     template_name = 'core/reviews.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reviews'] = Review.objects.all()
+        return context
 
 class ServicesView(TemplateView):
     template_name = 'core/services.html'
