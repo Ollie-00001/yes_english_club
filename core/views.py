@@ -2,14 +2,14 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from .models import Request
 from django.shortcuts import render
 
-def about(request):
-    return render(request, 'core/about.html')
+class AboutView(TemplateView):
+    template_name = 'core/about.html'
 
-def contacts(request):
-    return render(request, 'core/contacts.html')
+class ContactsView(TemplateView):
+    template_name = 'core/contacts.html'
 
-def order_details(request):
-    return render(request, 'core/order_details.html')
+class RequestDetailsView(TemplateView):
+    template_name = 'core/request_details.html'
 
 class RequestView(TemplateView):
     template_name = 'core/requests.html'
@@ -18,8 +18,8 @@ class RequestView(TemplateView):
         context['requests'] = Request.objects.all()
         return context
 
-def reviews(request):
-    return render(request, 'core/reviews.html')
+class ReviewsView(TemplateView):
+    template_name = 'core/reviews.html'
 
-def services(request):
-    return render(request, 'core/services.html')
+class ServicesView(TemplateView):
+    template_name = 'core/services.html'
