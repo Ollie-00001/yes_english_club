@@ -7,9 +7,11 @@
     
     <h1>Отзывы моих клиентов</h1>
     {% for review in reviews %}
-        <div class="review">
-            <p><strong>{{ review.client_name }}</strong>: {{ review.text }}</p>
-        </div>
+        {% if review.is_published %}
+            <div class="review">
+                <p><strong>{{ review.client_name }}</strong>: {{ review.text }}</p>
+            </div>
+        {% endif %}
     {% empty %}
         <p>Отзывов пока нет.</p>
     {% endfor %}
