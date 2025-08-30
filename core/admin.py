@@ -11,7 +11,6 @@ def custom_delete_selected(modeladmin, request, queryset):
         level=messages.SUCCESS
     )
 
-
 @admin.register(Request)
 class RequestAdmin(admin.ModelAdmin):
     list_display = ['client_name', 'email', 'phone_number', 'created_at']
