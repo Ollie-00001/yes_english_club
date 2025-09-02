@@ -9,10 +9,14 @@
     {% for review in reviews %}
         {% if review.is_published %}
             <div class="review">
-                <p><strong>{{ review.client_name }}</strong>: {{ review.text }}</p>
+                <p><strong>{{ review.client_name }}</strong>: {{ review.text }} - Рейтинг: {{ review.rating }}</p>
             </div>
         {% endif %}
     {% empty %}
         <p>Отзывов пока нет.</p>
     {% endfor %}
+    <h2>Понравилась моя работа? - Вы тоже можете оставить свой отзыв!</h2>
+    <a href="{% url 'create_review' %}">
+        <button type="submit">Оставить отзыв</button>
+    </a>
 {% endblock %}
