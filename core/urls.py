@@ -10,4 +10,5 @@ urlpatterns = [
     path('reviews/', views.ReviewsView.as_view(), name='reviews'),
     path('requests/', views.RequestView.as_view(), name='requests'),
     path('order_details/', views.RequestDetailsView.as_view(), name='order_details'),
+    path('thanks_for_request/', views.ThanksForRequestView.as_view(), name='thanks'),
 ]
