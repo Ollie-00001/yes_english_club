@@ -1,14 +1,24 @@
 from django import forms
-from phonenumber_field.formfields import PhoneNumberField as FormPhoneNumberField
+from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.phonenumber import to_python
 from .models import Request, Review, Service
 
 class RequestForm(forms.ModelForm):
-    phone_number = FormPhoneNumberField(region='RU')
+    phone_number = PhoneNumberField(
+        region='RU',
+        label='Номер телефона',
+        widget=forms.TextInput(attrs={'placeholder': 'Например: 81234567890'})
+    )
 
     class Meta:
         model = Request
         fields = ['client_name', 'email', 'phone_number', 'message']
+        widgets = {
+            'client_name': forms.TextInput(attrs={'placeholder': 'Ваше имя'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'E-mail'}),
+            'phone_number': forms.TextInput(attrs={'placeholder': '+71234567890'}),
+            'message': forms.Textarea(attrs={'placeholder': 'Сообщение', 'rows': 5}),
+        }
 
     def clean_phone_number(self):
         number = self.cleaned_data['phone_number']
