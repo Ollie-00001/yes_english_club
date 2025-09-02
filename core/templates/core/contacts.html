@@ -6,4 +6,18 @@
 {% block content %}
     <h1>Мои реквизиты</h1>
     <p>Это страница моих реквизитов. Здесь Вы можете найти мою контактную информацию и оставить заявку.</p>
+
+    <h3>Обкашлять вопросики</h3>
+    <p>Пишите мне в социальные сети или через форму обратной связи.</p>
+    <ul>
+        <li>Вконтакте: <a href="https://vk.com/amantesan">https://vk.com/amantesan</a></li>
+        <li>Instagram: <a href="https://instagram.com/_anastasia_wwww">https://www.instagram.com/_anastasia_wwww</a></li>
+    </ul>
+    <p>Telegram/WhatsApp: +7 (926) 123-45-67</p>
+
+    <form method="post" action="{% url 'contacts' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
 {% endblock %}
