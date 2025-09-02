@@ -29,7 +29,11 @@ class RequestForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['client_name', 'text']
+        fields = ['client_name', 'text', 'rating']
+        widgets = {
+            'client_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ваше имя'}),
+            'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Текст отзыва', 'rows': 4}),
+        }
 
 class ServiceForm(forms.ModelForm):
     class Meta:
