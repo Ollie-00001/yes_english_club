@@ -17,10 +17,18 @@ class Request(models.Model):
         return f"{self.client_name} ({self.created_at.strftime('%d.%m %H:%M')})"
     
 class Review(models.Model):
+    RATING_CHOICES = [
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    ]
+
     client_name = models.CharField(max_length=100, blank=True, verbose_name='Имя клиента')
     text = models.TextField(max_length=500, verbose_name='Текст отзыва')
     rating = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)], 
+        choices=RATING_CHOICES, 
         verbose_name='Оценка',
         default=5
         )
