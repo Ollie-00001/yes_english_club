@@ -1,11 +1,25 @@
-<nav class="main-nav">
-    <div class="nav-container">
-        <ul class="nav-links" id="nav-links">
-            {% for item in menu_items %}
-                <li>
-                    <a href="{% url item.url %}">{{ item.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-light py-0" style="background-color: #20b2aa;">
+  <div class="container">
+
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex gap-3">
+      {% for item in user_menu %}
+        <li class="nav-item">
+          <a class="nav-link text-white fw-semibold d-flex align-items-center" href="{% url item.url %}">
+            <i class="{{ item.icon }} me-1"></i> {{ item.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex gap-3">
+      {% for item in admin_menu %}
+        <li class="nav-item">
+          <a class="nav-link text-white fw-semibold d-flex align-items-center" href="{% url item.url %}">
+            <i class="{{ item.icon }} me-1"></i> {{ item.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+  </div>
 </nav>
