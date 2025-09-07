@@ -57,3 +57,6 @@ class ServicesView(ListView):
     model = Service
     template_name = 'core/services.html'
     context_object_name = 'services'
+
+class ScheduleView(TemplateView):
+    template_name = 'core/schedule.html'
