@@ -1,5 +1,5 @@
 from django.contrib import admin, messages
-from .models import Request, Review, Service
+from .models import Request, Review, Service, Teacher
 from django.contrib.admin.actions import delete_selected as default_delete_selected
 
 def custom_delete_selected(modeladmin, request, queryset):
@@ -48,3 +48,7 @@ class ReviewAdmin(admin.ModelAdmin):
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ['title', 'description', 'price']
     search_fields = ['title']
+
+@admin.register(Teacher)
+class TeacherAdmin(admin.ModelAdmin):
+    list_display = ('name', 'education', 'experience', 'email')
