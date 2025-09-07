@@ -1,3 +1,5 @@
+from .models import Logo
+
 def menu_items(request):
     user_menu = [
         {'title': 'О себе', 'url': 'about', 'icon': 'bi bi-person'},
@@ -15,4 +17,9 @@ def menu_items(request):
     return {
         'user_menu': user_menu,
         'admin_menu': admin_menu,
+    }
+
+def logo_context(request):
+    return {
+        'logo': Logo.objects.first()
     }
