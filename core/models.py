@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
+from django.utils.html import format_html
 
 class Request(models.Model):
     client_name = models.CharField(max_length=100, verbose_name='Имя клиента')
@@ -66,3 +67,19 @@ class Teacher(models.Model):
 
     def __str__(self):
         return self.name
+
+class Logo(models.Model):
+    image = models.ImageField(upload_to='logos/', verbose_name='Логотип')
+
+    class Meta:
+        verbose_name = 'Логотип'
+        verbose_name_plural = 'Логотипы'
+
+    def __str__(self):
+        return f'Логотип {self.id}'
+
+    def image_tag(self):
+        if self.image:
+            return format_html('<img src="{}" height="50"/>', self.image.url)
+        return "-"
+    image_tag.short_description = 'Превью'
