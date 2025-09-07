@@ -2,10 +2,15 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .forms import RequestForm
-from .models import Request, Review, Service
+from .models import Request, Review, Service, Teacher
 
 class AboutView(TemplateView):
     template_name = 'core/about.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['teacher'] = Teacher.objects.first()
+        return context
 
 class ContactsView(FormView):
     template_name = 'core/contacts.html'
