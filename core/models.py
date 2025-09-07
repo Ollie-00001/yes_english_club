@@ -52,3 +52,17 @@ class Service(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Teacher(models.Model):
+    name = models.CharField(max_length=200, verbose_name='Имя')
+    education = models.TextField(verbose_name='Образование')
+    experience = models.CharField(max_length=100, verbose_name='Опыт работы')
+    email = models.EmailField(verbose_name='Email')
+    photo = models.ImageField(upload_to='teacher_photos/', verbose_name='Фото')
+
+    class Meta:
+        verbose_name = 'Преподаватель'
+        verbose_name_plural = 'Преподаватели'
+
+    def __str__(self):
+        return self.name
