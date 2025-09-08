@@ -6,18 +6,36 @@ from .models import Request, Review, Service
 class RequestForm(forms.ModelForm):
     phone_number = PhoneNumberField(
         region='RU',
-        label='Номер телефона',
-        widget=forms.TextInput(attrs={'placeholder': 'Например: 81234567890'})
+        label='',
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Телефон',
+            'class': 'form-control'
+        })
     )
 
     class Meta:
         model = Request
         fields = ['client_name', 'email', 'phone_number', 'message']
+        labels = {
+            'client_name': '',
+            'email': '',
+            'phone_number': '',
+            'message': '',
+        }
         widgets = {
-            'client_name': forms.TextInput(attrs={'placeholder': 'Ваше имя'}),
-            'email': forms.EmailInput(attrs={'placeholder': 'E-mail'}),
-            'phone_number': forms.TextInput(attrs={'placeholder': '+71234567890'}),
-            'message': forms.Textarea(attrs={'placeholder': 'Сообщение', 'rows': 5}),
+            'client_name': forms.TextInput(attrs={
+                'placeholder': 'Ваше имя',
+                'class': 'form-control'
+            }),
+            'email': forms.EmailInput(attrs={
+                'placeholder': 'E-mail',
+                'class': 'form-control'
+            }),
+            'message': forms.Textarea(attrs={
+                'placeholder': 'Сообщение',
+                'rows': 5,
+                'class': 'form-control'
+            }),
         }
 
     def clean_phone_number(self):
