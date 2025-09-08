@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.html import format_html
+import re
+import requests
 
 class Request(models.Model):
     client_name = models.CharField(max_length=100, verbose_name='Имя клиента')
@@ -86,7 +88,7 @@ class Logo(models.Model):
 
 class Video(models.Model):
     title = models.CharField(max_length=200, verbose_name="Название видео")
-    embed_url = models.URLField(verbose_name="Ссылка на embed видео")
+    url = models.URLField(verbose_name="Ссылка на видео")
 
     class Meta:
         verbose_name = "Видео"
@@ -94,3 +96,28 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+
+    def embed_url(self):
+        # --- YouTube ---
+        if "youtube.com/watch" in self.url:
+            video_id = re.search(r"v=([^&]+)", self.url).group(1)
+            return f"https://www.youtube.com/embed/{video_id}"
+        elif "youtu.be/" in self.url:
+            video_id = self.url.split("/")[-1]
+            return f"https://www.youtube.com/embed/{video_id}"
+
+        # --- VK ---
+        elif "vk.com/video" in self.url and "video_ext.php" not in self.url:
+            match = re.search(r"video(-?\d+)_(\d+)", self.url)
+            if match:
+                owner_id, video_id = match.groups()
+                try:
+                    r = requests.get("https://vk.com/video_ext.php", params={
+                        "oid": owner_id,
+                        "id": video_id
+                    })
+                    if r.status_code == 200:
+                        return f"https://vk.com/video_ext.php?oid={owner_id}&id={video_id}"
+                except:
+                    return None
+        return self.url
