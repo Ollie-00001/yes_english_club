@@ -4,20 +4,52 @@
 {% block title %}Контакты{% endblock %}
 
 {% block content %}
-    <h1>Мои реквизиты</h1>
-    <p>Это страница моих реквизитов. Здесь Вы можете найти мою контактную информацию и оставить заявку.</p>
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="section-container video-section">
+                <div class="content">
+                    <h1>Тут будет видео</h1>
+                </div>
+            </section>
+        </div>
+    </div>
 
-    <h3>Обкашлять вопросики</h3>
-    <p>Пишите мне в социальные сети или через форму обратной связи.</p>
-    <ul>
-        <li>Вконтакте: <a href="https://vk.com/amantesan">https://vk.com/amantesan</a></li>
-        <li>Instagram: <a href="https://instagram.com/_anastasia_wwww">https://www.instagram.com/_anastasia_wwww</a></li>
-    </ul>
-    <p>Telegram/WhatsApp: +7 (926) 123-45-67</p>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <h3>Обкашлять вопросики</h3>
+                <p>Пишите мне в социальные сети или через форму обратной связи.</p>
+                <ul class="list-unstyled">
+                    <li>
+                        <i class="fab fa-vk fs-3 me-1"></i>
+                        Вконтакте: <a href="https://vk.com/amantesan" target="_blank">vk.com/amantesan</a>
+                    </li>
+                    <li>
+                        <i class="bi bi-instagram fs-4 me-1"></i>
+                        Instagram: <a href="https://instagram.com/_anastasia_wwww" target="_blank">instagram.com/_anastasia_wwww</a>
+                    </li>
+                </ul>
+                <p><i class="bi bi-telegram fs-4 me-1"></i>Telegram/WhatsApp: +7 (926) 123-45-67</p>
+            </div>
 
-    <form method="post" action="{% url 'contacts' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Отправить</button>
-    </form>
+            <div class="form-section col-md-6">
+                <form method="post" action="{% url 'contacts' %}" class="p-0">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.client_name }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.email }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.phone_number }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.message }}
+                    </div>
+                    <button type="submit" class="btn btn-custom">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
