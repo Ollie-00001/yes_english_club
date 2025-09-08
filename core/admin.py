@@ -1,5 +1,5 @@
 from django.contrib import admin, messages
-from .models import Request, Review, Service, Teacher, Logo
+from .models import Request, Review, Service, Teacher, Logo, Video
 from django.contrib.admin.actions import delete_selected as default_delete_selected
 
 def custom_delete_selected(modeladmin, request, queryset):
@@ -56,3 +56,7 @@ class TeacherAdmin(admin.ModelAdmin):
 @admin.register(Logo)
 class LogoAdmin(admin.ModelAdmin):
     list_display = ('id', 'image_tag',)
+
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ("title", "embed_url")
