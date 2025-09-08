@@ -83,3 +83,14 @@ class Logo(models.Model):
             return format_html('<img src="{}" height="50"/>', self.image.url)
         return "-"
     image_tag.short_description = 'Превью'
+
+class Video(models.Model):
+    title = models.CharField(max_length=200, verbose_name="Название видео")
+    embed_url = models.URLField(verbose_name="Ссылка на embed видео")
+
+    class Meta:
+        verbose_name = "Видео"
+        verbose_name_plural = "Видео"
+
+    def __str__(self):
+        return self.title
