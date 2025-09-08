@@ -2,7 +2,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .forms import RequestForm
-from .models import Request, Review, Service, Teacher
+from .models import Request, Review, Service, Teacher, Video
 
 class AboutView(TemplateView):
     template_name = 'core/about.html'
@@ -16,6 +16,11 @@ class ContactsView(FormView):
     template_name = 'core/contacts.html'
     form_class = RequestForm
     success_url = reverse_lazy('thanks_for_request')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["video"] = Video.objects.first()
+        return context
 
     def form_valid(self, form):
         form.save()
