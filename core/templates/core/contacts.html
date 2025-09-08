@@ -6,10 +6,19 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
-            <section class="section-container video-section">
-                <div class="content">
-                    <h1>Тут будет видео</h1>
-                </div>
+            <section class="video-section my-5 text-center">
+                {% if video %}
+                    <h2 class="mb-3">{{ video.title }}</h2>
+                    <div class="ratio ratio-16x9">
+                        <iframe src="{{ video.embed_url }}" 
+                                frameborder="0" 
+                                allowfullscreen 
+                                allow="autoplay; encrypted-media">
+                        </iframe>
+                    </div>
+                {% else %}
+                    <p>Видео пока не добавлено.</p>
+                {% endif %}
             </section>
         </div>
     </div>
