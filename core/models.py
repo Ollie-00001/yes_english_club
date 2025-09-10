@@ -87,37 +87,39 @@ class Logo(models.Model):
     image_tag.short_description = 'Превью'
 
 class Video(models.Model):
-    title = models.CharField(max_length=200, verbose_name="Название видео")
-    url = models.URLField(verbose_name="Ссылка на видео")
+    title = models.CharField(max_length=200, verbose_name="Название")
+    original_url = models.URLField(verbose_name="Ссылка на видео")
+    embed_url = models.URLField(verbose_name="Embed-ссылка", blank=True)
 
     class Meta:
         verbose_name = "Видео"
         verbose_name_plural = "Видео"
 
-    def __str__(self):
-        return self.title
+    def save(self, *args, **kwargs):
+        """Автоматическая конвертация ссылки в embed"""
+        self.embed_url = self.convert_to_embed(self.original_url)
+        super().save(*args, **kwargs)
 
-    def embed_url(self):
-        # --- YouTube ---
-        if "youtube.com/watch" in self.url:
-            video_id = re.search(r"v=([^&]+)", self.url).group(1)
-            return f"https://www.youtube.com/embed/{video_id}"
-        elif "youtu.be/" in self.url:
-            video_id = self.url.split("/")[-1]
+    @staticmethod
+    def convert_to_embed(url):
+        # YouTube
+        if "youtube.com" in url or "youtu.be" in url:
+            video_id = None
+            if "youtu.be" in url:
+                video_id = url.split("/")[-1]
+            elif "watch?v=" in url:
+                video_id = url.split("watch?v=")[-1].split("&")[0]
             return f"https://www.youtube.com/embed/{video_id}"
 
-        # --- VK ---
-        elif "vk.com/video" in self.url and "video_ext.php" not in self.url:
-            match = re.search(r"video(-?\d+)_(\d+)", self.url)
+        # VK
+        if "vk.com" in url:
+            match = re.search(r"video([-0-9]+)_([0-9]+)", url)
             if match:
                 owner_id, video_id = match.groups()
-                try:
-                    r = requests.get("https://vk.com/video_ext.php", params={
-                        "oid": owner_id,
-                        "id": video_id
-                    })
-                    if r.status_code == 200:
-                        return f"https://vk.com/video_ext.php?oid={owner_id}&id={video_id}"
-                except:
-                    return None
-        return self.url
+                return f"https://vk.com/video_ext.php?oid={owner_id}&id={video_id}"
+
+        # fallback
+        return url
+
+    def __str__(self):
+        return self.title
