@@ -77,7 +77,7 @@
         <h2 class="title mb-5 text-center">Как проходит занятие</h2>
 
         <div class="d-flex flex-row align-items-stretch flex-wrap flex-md-nowrap p-2">
-            <div class="text-column me-md-3 flex-shrink-0 col-md-6">
+            <div class="text-column md-3 flex-shrink-0 col-md-6">
                 <div class="text-block">
                     <h3 class="mb-3">
                         Продуманная структура занятия играет большую роль в достижении качественных результатов после каждого посещения нашей школы.
@@ -113,10 +113,28 @@
                 </div>
             </div>
 
-            <div class="image-column col-md-6 d-flex justify-content-center align-items-center">
-                <img src="{% static 'core/images/class.jpg' %}" 
-                     alt="Фото занятия" 
-                     class="img-fluid h-100">
+            <div class="image-column col-md-6 d-flex flex-column">
+                <div class="image-preview d-flex align-items-center justify-content-center">
+                    <img id="preview-img" src="" alt="Превью" class="class-structure-image object-fit-contain">
+                </div>
+
+                <div class="image-thumbnails-wrapper">
+                <button class="thumb-nav left" aria-label="prev slide" type="button"><i class="bi bi-arrow-bar-left"></i></button>
+
+                <div class="image-thumbnails-viewport">
+                    <div class="image-thumbnails">
+                    <a href="#" class="thumb"><img src="{% static 'core/images/class.jpg' %}" alt="Фото 1"></a>
+                    <a href="#" class="thumb"><img src="{% static 'core/images/logo.jpg' %}" alt="Фото 2"></a>
+                    <a href="#" class="thumb"><img src="{% static 'core/images/profile.jpg' %}" alt="Фото 3"></a>
+                    <a href="#" class="thumb"><img src="{% static 'core/images/class.jpg' %}" alt="Фото 4"></a>
+                    <a href="#" class="thumb"><img src="{% static 'core/images/logo.jpg' %}" alt="Фото 5"></a>
+                    <a href="#" class="thumb"><img src="{% static 'core/images/profile.jpg' %}" alt="Фото 6"></a>
+                    <a href="#" class="thumb"><img src="{% static 'core/images/class.jpg' %}" alt="Фото 7"></a>
+                    </div>
+                </div>
+
+                <button class="thumb-nav right" aria-label="next slide" type="button"><i class="bi bi-arrow-bar-right"></i></button>
+                </div>
             </div>
         </div>
     </div>
