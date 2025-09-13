@@ -12,11 +12,8 @@
                 class="teacher-photo d-block">
         </div>
 
-        <div class="info-container ps-4 d-flex flex-column gap-2">
-            <div class="info-line"><strong>Меня зовут:</strong> {{ teacher.name }}</div>
-            <div class="info-line"><strong>Образование:</strong> {{ teacher.education }}</div>
-            <div class="info-line"><strong>Опыт работы:</strong> {{ teacher.experience }}</div>
-            <div class="info-line"><strong>Email:</strong> {{ teacher.email }}</div>
+        <div class="info-container d-flex flex-column align-items-center text-center">
+            <div class="info-line">{{ teacher.description }}</div>
         </div>
     </div>
 
