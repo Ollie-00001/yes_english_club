@@ -89,37 +89,32 @@ class Logo(models.Model):
 class Video(models.Model):
     title = models.CharField(max_length=200, verbose_name="Название")
     original_url = models.URLField(verbose_name="Ссылка на видео")
-    embed_url = models.URLField(verbose_name="Embed-ссылка", blank=True)
+    embed_url = models.URLField(verbose_name="Встраиваемая ссылка (генерируется автоматически, вставлять ничего не нужно)", blank=True)
 
+    def generate_vk_iframe(self, Autoplay=False, hd=3, use_vk_com_domain=True):
+
+        pattern = re.compile(r'https://vkvideo\.ru/video(-[0-9]+)_([0-9]+)')
+
+        match = pattern.search(self.original_url)
+        
+        if not match:
+            print(f"Неверный формат URL для VK Video {self.original_url}")
+            return None
+        
+        oid = match.group(1)
+        video_id = match.group(2)
+
+        domain = 'vk.com' if use_vk_com_domain else 'vkvideo.ru'
+
+        autoplay_value = 1 if Autoplay else 0
+
+        embed_url = f"https://{domain}/video_ext.php?oid={oid}&id={video_id}&hash=1&hd={hd}&autoplay={autoplay_value}"
+        
+        return embed_url
     class Meta:
         verbose_name = "Видео"
         verbose_name_plural = "Видео"
 
     def save(self, *args, **kwargs):
-        """Автоматическая конвертация ссылки в embed"""
-        self.embed_url = self.convert_to_embed(self.original_url)
+        self.embed_url = self.generate_vk_iframe(Autoplay=False)
         super().save(*args, **kwargs)
-
-    @staticmethod
-    def convert_to_embed(url):
-        # YouTube
-        if "youtube.com" in url or "youtu.be" in url:
-            video_id = None
-            if "youtu.be" in url:
-                video_id = url.split("/")[-1]
-            elif "watch?v=" in url:
-                video_id = url.split("watch?v=")[-1].split("&")[0]
-            return f"https://www.youtube.com/embed/{video_id}"
-
-        # VK
-        if "vk.com" in url:
-            match = re.search(r"video([-0-9]+)_([0-9]+)", url)
-            if match:
-                owner_id, video_id = match.groups()
-                return f"https://vk.com/video_ext.php?oid={owner_id}&id={video_id}"
-
-        # fallback
-        return url
-
-    def __str__(self):
-        return self.title
