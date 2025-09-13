@@ -58,10 +58,16 @@ class Service(models.Model):
     
 class Teacher(models.Model):
     name = models.CharField(max_length=200, verbose_name='Имя')
-    education = models.TextField(verbose_name='Образование')
-    experience = models.CharField(max_length=100, verbose_name='Опыт работы')
+    education = models.TextField(verbose_name='Образование', blank=True)
+    experience = models.CharField(max_length=100, verbose_name='Опыт работы', blank=True)
     email = models.EmailField(verbose_name='Email')
-    photo = models.ImageField(upload_to='teacher_photos/', verbose_name='Фото')
+    photo = models.ImageField(upload_to='teacher_photos/', verbose_name='Фото', blank=True, null=True)
+    description = models.TextField(verbose_name='Описание', null=True, blank=True)
+
+    def blank_description(self):
+        if not self.description:
+            return ""
+        return self.description
 
     class Meta:
         verbose_name = 'Преподаватель'
@@ -111,6 +117,7 @@ class Video(models.Model):
         embed_url = f"https://{domain}/video_ext.php?oid={oid}&id={video_id}&hash=1&hd={hd}&autoplay={autoplay_value}"
         
         return embed_url
+    
     class Meta:
         verbose_name = "Видео"
         verbose_name_plural = "Видео"
