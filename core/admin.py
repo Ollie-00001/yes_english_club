@@ -1,6 +1,7 @@
 from django.contrib import admin, messages
-from .models import Request, Review, Service, Teacher, Logo, Video
+from .models import Request, Review, Service, Teacher, Logo, Video, GalleryImage
 from django.contrib.admin.actions import delete_selected as default_delete_selected
+from adminsortable2.admin import SortableAdminMixin
 
 def custom_delete_selected(modeladmin, request, queryset):
     count = queryset.count()
@@ -52,6 +53,10 @@ class ServiceAdmin(admin.ModelAdmin):
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
     list_display = ('name', 'education', 'experience', 'email')
+
+@admin.register(GalleryImage)
+class GalleryImageAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ['__str__', 'image', 'order']
 
 @admin.register(Logo)
 class LogoAdmin(admin.ModelAdmin):
