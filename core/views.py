@@ -2,7 +2,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .forms import RequestForm
-from .models import Request, Review, Service, Teacher, Video
+from .models import Request, Review, Service, Teacher, Video, GalleryImage
 
 class AboutView(TemplateView):
     template_name = 'core/about.html'
@@ -10,6 +10,7 @@ class AboutView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['teacher'] = Teacher.objects.first()
+        context['gallery_images'] = GalleryImage.objects.all()
         return context
 
 class ContactsView(FormView):
