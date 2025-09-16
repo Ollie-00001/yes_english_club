@@ -123,13 +123,11 @@
 
                 <div class="image-thumbnails-viewport">
                     <div class="image-thumbnails">
-                    <a href="#" class="thumb"><img src="{% static 'core/images/class.jpg' %}" alt="Фото 1"></a>
-                    <a href="#" class="thumb"><img src="{% static 'core/images/logo.jpg' %}" alt="Фото 2"></a>
-                    <a href="#" class="thumb"><img src="{% static 'core/images/profile.jpg' %}" alt="Фото 3"></a>
-                    <a href="#" class="thumb"><img src="{% static 'core/images/class.jpg' %}" alt="Фото 4"></a>
-                    <a href="#" class="thumb"><img src="{% static 'core/images/logo.jpg' %}" alt="Фото 5"></a>
-                    <a href="#" class="thumb"><img src="{% static 'core/images/profile.jpg' %}" alt="Фото 6"></a>
-                    <a href="#" class="thumb"><img src="{% static 'core/images/class.jpg' %}" alt="Фото 7"></a>
+                        {% for img in gallery_images %}
+                        <a href="#" class="thumb">
+                            <img src="{{ img.image.url }}" alt="{{ img.title }}">
+                        </a>
+                        {% endfor %}
                     </div>
                 </div>
 
