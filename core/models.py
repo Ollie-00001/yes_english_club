@@ -29,19 +29,22 @@ class Review(models.Model):
     client_name = models.CharField(max_length=100, blank=True, verbose_name='Имя клиента')
     text = models.TextField(max_length=500, verbose_name='Текст отзыва')
     rating = models.PositiveSmallIntegerField(
-        choices=RATING_CHOICES, 
+        choices=RATING_CHOICES,
         verbose_name='Оценка',
         default=5
-        )
+    )
     is_published = models.BooleanField(default=False, verbose_name="Опубликован")
+
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата добавления")
 
     class Meta:
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.client_name or f"Отзыв {self.pk}"
-    
+
     @property
     def get_remaining_stars(self):
         return 5 - self.rating
