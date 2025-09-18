@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnRight = wrapper.querySelector('.thumb-nav.right');
 
     const VISIBLE = 5;
-    let activeIndex = 0; // индекс активной миниатюры
-    let offset = 0;      // сдвиг карусели
+    let activeIndex = 0;
+    let offset = 0;
 
     function updatePreview() {
         preview.src = thumbImages[activeIndex].src;
@@ -18,19 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateCarousel() {
         const step = thumbImages[0].offsetWidth + parseInt(getComputedStyle(thumbnails).gap || 8);
-        // смещаем карусель на активную фотку
         offset = activeIndex;
         thumbnails.style.transform = `translateX(${-offset * step}px)`;
     }
 
         function goNext() {
-        activeIndex = (activeIndex + 1) % thumbImages.length; // зацикливаем вправо
+        activeIndex = (activeIndex + 1) % thumbImages.length;
         updatePreview();
         updateCarousel();
     }
 
     function goPrev() {
-        activeIndex = (activeIndex - 1 + thumbImages.length) % thumbImages.length; // зацикливаем влево
+        activeIndex = (activeIndex - 1 + thumbImages.length) % thumbImages.length;
         updatePreview();
         updateCarousel();
     }
@@ -47,12 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // автопрокрутка
     let timer = setInterval(goNext, 3000);
     wrapper.addEventListener('mouseenter', () => clearInterval(timer));
     wrapper.addEventListener('mouseleave', () => timer = setInterval(goNext, 3000));
 
-    // старт
     updatePreview();
     updateCarousel();
 });
@@ -87,4 +84,23 @@ document.addEventListener('DOMContentLoaded', function() {
     visibleCount = next;
     updateButton();
   });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const reviewCards = document.querySelectorAll('.review-card');
+
+    reviewCards.forEach(card => {
+        const text = card.querySelector('.review-text');
+        const btn = card.querySelector('.btn-toggle-text');
+
+        const maxHeight = parseInt(getComputedStyle(text).lineHeight) * 3;
+        if (text.scrollHeight > maxHeight) {
+            btn.style.display = 'inline-block';
+        }
+
+        btn.addEventListener('click', () => {
+            text.classList.toggle('clamp');
+            btn.textContent = text.classList.contains('clamp') ? 'Развернуть' : 'Скрыть';
+        });
+    });
 });
