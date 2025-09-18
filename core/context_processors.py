@@ -2,11 +2,11 @@ from .models import Logo
 
 def menu_items(request):
     user_menu = [
-        {'title': 'О себе', 'url': 'about', 'icon': 'bi bi-person'},
-        {'title': 'Услуги', 'url': 'services', 'icon': 'bi bi-card-checklist'},
-        {'title': 'Контакты', 'url': 'contacts', 'icon': 'bi bi-phone'},
-        {'title': 'Отзывы', 'url': 'reviews', 'icon': 'bi bi-award'},
-        {'title': 'Расписание', 'url': 'schedule', 'icon': 'bi bi-calendar-week'},
+        {'title': 'О себе', 'url_name': 'about', 'anchor': '', 'icon': 'bi bi-person'},
+        {'title': 'Стоимость', 'url_name': 'home', 'anchor': 'services', 'icon': 'bi bi-cash'},
+        {'title': 'Контакты', 'url_name': 'contacts', 'anchor': '', 'icon': 'bi bi-phone'},
+        {'title': 'Отзывы', 'url_name': 'reviews', 'anchor': '', 'icon': 'bi bi-award'},
+        {'title': 'Расписание', 'url_name': 'schedule', 'anchor': '', 'icon': 'bi bi-calendar-week'},
     ]
 
     admin_menu = []
