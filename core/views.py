@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, FormView
 from django.contrib import messages
 from django.urls import reverse_lazy
-from .forms import RequestForm
+from .forms import RequestForm, ReviewForm
 from .models import Request, Review, Service, Teacher, Video, GalleryImage
 
 class AboutView(TemplateView):
@@ -54,7 +54,7 @@ class ReviewsView(ListView):
 class ReviewCreateView(CreateView):
     model = Review
     template_name = 'core/create_review.html'
-    fields = ['client_name', 'text', 'rating']
+    form_class = ReviewForm
     success_url = reverse_lazy('thanks_for_review')
 
     def form_valid(self, form):
