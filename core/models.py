@@ -33,14 +33,18 @@ class Review(models.Model):
         verbose_name='Оценка',
         default=5
         )
-    is_published = models.BooleanField(default=True, verbose_name="Опубликован")
+    is_published = models.BooleanField(default=False, verbose_name="Опубликован")
 
     class Meta:
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
 
     def __str__(self):
-        return f'{self.client_name or 'Аноним'} - {self.rating}/5'
+        return self.client_name or f"Отзыв {self.pk}"
+    
+    @property
+    def get_remaining_stars(self):
+        return 5 - self.rating
 
 class Service(models.Model):
     title = models.CharField(max_length=100, verbose_name='Услуга')
