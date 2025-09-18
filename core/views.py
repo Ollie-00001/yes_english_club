@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from .forms import RequestForm, ReviewForm
 from .models import Request, Review, Service, Teacher, Video, GalleryImage
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 class AboutView(TemplateView):
     template_name = 'core/about.html'
@@ -31,10 +32,15 @@ class ContactsView(FormView):
 class ThanksForRequestView(TemplateView):
     template_name = 'core/thanks_for_request.html'
 
-class RequestView(ListView):
+class RequestView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Request
     template_name = 'core/requests.html'
     context_object_name = 'requests'
+
+    login_url = "login"
+
+    def test_func(self):
+        return self.request.user.is_staff
 
 class RequestDetailsView(DetailView):
     model = Request

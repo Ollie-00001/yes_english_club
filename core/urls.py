@@ -3,6 +3,7 @@ from django.conf import settings
 from django.urls import path
 from django.conf.urls.static import static
 from core import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.AboutView.as_view(), name='home'),
@@ -16,6 +17,7 @@ urlpatterns = [
     path('schedule/', views.ScheduleView.as_view(), name='schedule'),
     path('requests/', views.RequestView.as_view(), name='requests'),
     path('order_details/', views.RequestDetailsView.as_view(), name='order_details'),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='core/login.html'), name='login'),
 ]
 
 if settings.DEBUG:
