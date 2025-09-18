@@ -1,4 +1,5 @@
-/* Global styles */
+/* GLOBAL STYLES */
+
 html, body {
     height: 100%;
     margin: 0;
@@ -17,10 +18,6 @@ body {
 
 main {
     flex: 1;
-}
-
-h3 {
-    font-size: 21px;
 }
 
 /* Header */
@@ -55,6 +52,124 @@ h3 {
     background-color: #ffffff1a;
 }
 
+/* Full width sections */
+/* Features section */
+.features-section {
+    position: relative;
+    color: #fff;
+}
+
+.features-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-50vw + 50%);
+    right: calc(-50vw + 50%);
+    bottom: 0;
+    background: #1d998e;
+    z-index: -1;
+}
+
+.features-section .info-card i {
+    color: #ffecc9;
+}
+
+/* Price Section */
+.price-section {
+    position: relative;
+    color: #fff;
+}
+
+.price-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-50vw + 50%);
+    right: calc(-50vw + 50%);
+    bottom: 0;
+    background: #20b2aa;
+    z-index: -1;
+}
+
+/* Map */
+.map-section {
+    position: relative;
+    color: #2c3e50;
+}
+
+.map-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-50vw + 50%);
+    right: calc(-50vw + 50%);
+    bottom: 0;
+    background: #dcd9d3;
+    z-index: -1;
+}
+
+/* Footer */
+.page-footer-section {
+    position: relative;
+    color: #ffeeceff;
+}
+
+.page-footer-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-50vw + 50%);
+    right: calc(-50vw + 50%);
+    bottom: 0;
+    background: #2c3e50;
+    z-index: -1;
+}
+
+.footer-left {
+    color: #ffeeceff;
+}
+
+/* Titles */
+.section-title {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em; 
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.service-title,
+.info-card-title {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    margin-bottom: 15px;
+}
+
+.service-title {
+    color: #2c3e50;
+}
+
+.info-card-title {
+    color: #fff;
+}
+
+.price-section .section-title {
+    color: #fff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.reviews-title {
+    inherits: section-title;
+    color: #2c3e50;
+}
+
+/* ALL PAGE SECTIONS */
+
+/* About Page */
 /* About section */
 .about-section {
     display: flex;
@@ -82,57 +197,9 @@ h3 {
     max-width: 600px;
 }
 
-@media (max-width: 768px) {
-    .about-section {
-        flex-direction: column;
-        text-align: center;
-    }
-    .info-container {
-        align-items: center;
-    }
-    .photo-container {
-        margin-bottom: 1rem;
-    }
-}
-/* Full width sections */
-.section-alt {
-    position: relative;
-    color: white;
-}
-
-.section-alt::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: calc(-50vw + 50%);
-    right: calc(-50vw + 50%);
-    bottom: 0;
-    background: #1d998e;
-    z-index: -1;
-}
-
-.section-alt .info-card i {
-    color: #ffecc9;
-}
-
-/* Block titles */
-.title {
-    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 24px;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
 /* Features section */
 .info-card {
     max-width: 380px;
-}
-
-.info-card-title {
-    text-transform: uppercase;
-    font-weight: 800;
-    font-size: 16px;
-    line-height: 24px;
 }
 
 .info-card-text {
@@ -156,7 +223,6 @@ h3 {
 }
 
 /* Class structure section */
-
 .image-column img {
     width: 100%;
     max-width: 400px;
@@ -257,44 +323,112 @@ h3 {
 .image-thumbnails::-webkit-scrollbar { display: none; }
 .image-thumbnails { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Map */
-.map-section {
+/* Price Section */
+.price-section .price-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px 24px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     position: relative;
-    color: #2c3e50;
+    overflow: hidden;
 }
 
-.map-section::before {
+.price-section .price-card::before {
     content: '';
     position: absolute;
     top: 0;
-    left: calc(-50vw + 50%);
-    right: calc(-50vw + 50%);
+    left: 0;
+    right: 0;
     bottom: 0;
-    background: #dcd9d3;
-    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.price-section .price-card:hover::before {
+    opacity: 1;
+}
+
+.price-section .price-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.price-section .icon-circle {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ffeeceff, #20b2aa);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #1d998e;
+    font-size: 2rem;
+    box-shadow: 0 8px 24px rgba(255, 238, 206, 0.3);
+    transition: all 0.3s ease;
+}
+
+.price-section .price-card:hover .icon-circle {
+    transform: rotateY(360deg);
+    transition: all 1s ease;
+    box-shadow: 0 12px 32px rgba(255, 238, 206, 0.5);
+}
+
+.price-section .price {
+    color: #f08080;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 4px rgba(212, 59, 59, 0.2);
+    position: relative;
+}
+
+.price-section .details {
+    color: #2c3e50;
+    opacity: 0.8;
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 500;
+}
+
+/* Animation for loading */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.service-card,
+.price-card {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.service-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.price-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.price-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.price-card:nth-child(4) {
+    animation-delay: 0.3s;
 }
 
 /* Footer */
-.page-footer {
-    position: relative;
-    color: #ffeeceff;
-}
-
-.page-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: calc(-50vw + 50%);
-    right: calc(-50vw + 50%);
-    bottom: 0;
-    background: #2c3e50;
-    z-index: -1;
-}
-
-.footer-left {
-    color: #ffeeceff;
-}
-
 .footer-right i {
     color: #ffeeceff;
     transition: all 0.3s ease;
@@ -304,14 +438,12 @@ h3 {
     color: #20b2aa;
 }
 
-/* Contacts */
-
+/* Contacts Page */
 /* Contacts video section */
 .row .col-sm-12 {
     width: 100%;
 }
 
-/* Custom form section */
 .btn-custom {
     background-color: #20b2aa;
     color: #fff;
@@ -324,4 +456,204 @@ h3 {
 .btn-custom:hover {
     background-color: #1d998e;
     color: #fff;
+}
+
+/* Reviews Page */
+.reviews-container {
+    max-width: 900px;
+    margin: auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    align-items: start;
+}
+
+.review-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.review-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.review-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.review-card-info {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.star-rating {
+    flex-shrink: 0;
+    align-self: flex-start;
+}
+
+.client-name {
+    font-weight: 600;
+    font-size: 1.1em;
+    max-width: 100%;
+    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.star-rating .star {
+    color: #ffc107;
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+.star-rating .star.empty {
+    color: #e0e0e0;
+}
+
+.review-text {
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.review-text.clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    
+    display: box;
+    box-orient: vertical;
+    line-clamp: 3;
+}
+
+.btn-toggle-text {
+    display: none;
+    text-align: left; 
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #20b2aa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.review-card.hidden { display: none; }
+.review-card.fade-in {
+  animation: fadeInUp .28s ease both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-more {
+    border: 1px solid #eaeaea;
+    background-color: #fff;
+    color: #2c3e50;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.btn-more:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Leave Review Section */
+.leave-review-section {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #eaeaea;
+}
+
+.leave-review-section p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.btn-leave-review {
+    display: inline-block;
+    background-color: #20b2aa;
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-leave-review:hover {
+    background-color: #1d998e;
+}
+
+.no-reviews {
+    text-align: center;
+    color: #777;
+    padding: 40px 0;
+}
+
+.review-form-container {
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+.review-form input,
+.review-form textarea,
+.review-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.review-card-info small {
+    font-size: 0.85em;
+    color: #777;
+}
+
+.review-form .btn-submit {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #20b2aa;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.review-form .btn-submit:hover {
+    background-color: #1d998e;
 }
