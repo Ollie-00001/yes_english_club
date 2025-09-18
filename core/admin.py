@@ -20,7 +20,7 @@ class RequestAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ['client_name', 'text', 'rating', 'is_published']
+    list_display = ['client_name', 'created_at', 'text', 'rating', 'is_published']
     search_fields = ['client_name', 'text']
     actions = ['mark_as_published', 'mark_as_unpublished', 'custom_delete_selected']
     list_filter = ['is_published', 'rating']
