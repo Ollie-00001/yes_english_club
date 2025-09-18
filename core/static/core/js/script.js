@@ -56,3 +56,35 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePreview();
     updateCarousel();
 });
+
+// Reviews pagination
+document.addEventListener('DOMContentLoaded', function() {
+  const grid = document.getElementById('reviewsGrid');
+  const loadBtn = document.getElementById('loadMoreBtn');
+  if (!grid || !loadBtn) return;
+
+  const reviews = Array.from(grid.querySelectorAll('.review-card'));
+  const initial = parseInt(grid.dataset.initial) || 4;
+  let visibleCount = initial;
+
+  reviews.forEach((el, idx) => {
+    if (idx < visibleCount) el.classList.remove('hidden');
+    else el.classList.add('hidden');
+  });
+
+  function updateButton() {
+    loadBtn.style.display = (visibleCount >= reviews.length) ? 'none' : '';
+  }
+  updateButton();
+
+  loadBtn.addEventListener('click', function() {
+    const next = Math.min(reviews.length, visibleCount + initial);
+    for (let i = visibleCount; i < next; i++) {
+      reviews[i].classList.remove('hidden');
+      reviews[i].classList.add('fade-in');
+      setTimeout(() => reviews[i].classList.remove('fade-in'), 350);
+    }
+    visibleCount = next;
+    updateButton();
+  });
+});
