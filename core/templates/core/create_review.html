@@ -4,11 +4,23 @@
 {% block title %}Контакты{% endblock %}
 
 {% block content %}
-    <h1>Оставить отзыв</h1>
+<div class="form-review-container py-lg-3">
+    <div class="review-form-container">
+        <h1>Оставить отзыв</h1>
 
-    <form method="post" action="{% url 'create_review' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Отправить</button>
-    </form>
+        <form method="post" action="{% url 'create_review' %}" class="review-form">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.client_name }}
+            </div>
+            <div class="mb-3">
+                {{ form.text }}
+            </div>
+            <div class="mb-3">
+                {{ form.rating }}
+            </div>
+            <button type="submit" class="btn-submit">Отправить</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

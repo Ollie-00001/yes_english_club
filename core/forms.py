@@ -48,9 +48,27 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['client_name', 'text', 'rating']
+        labels = {
+            'client_name': '',
+            'text': '',
+            'rating': '',
+        }
         widgets = {
-            'client_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ваше имя'}),
-            'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Текст отзыва', 'rows': 4}),
+            'client_name': forms.TextInput(attrs={
+                'placeholder': 'Ваше имя',
+                'class': 'form-control'
+            }),
+            'text': forms.Textarea(attrs={
+                'placeholder': 'Ваш отзыв',
+                'rows': 5,
+                'class': 'form-control'
+            }),
+            'rating': forms.NumberInput(attrs={
+                'placeholder': 'Ваша оценка',
+                'class': 'form-control',
+                'min': 1,
+                'max': 5
+            }),
         }
 
 class ServiceForm(forms.ModelForm):
