@@ -46,6 +46,11 @@ class ReviewsView(ListView):
     template_name = 'core/reviews.html'
     context_object_name = 'reviews'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reviews'] = Review.objects.filter(is_published=True).order_by('-id')
+        return context
+
 class ReviewCreateView(CreateView):
     model = Review
     template_name = 'core/create_review.html'
@@ -53,7 +58,7 @@ class ReviewCreateView(CreateView):
     success_url = reverse_lazy('thanks_for_review')
 
     def form_valid(self, form):
-        messages.success(self.request, 'Ваш отзыв был успешно отправлен!')
+        messages.success(self.request, 'Ваш отзыв был успешно отправлен! Он будет опубликован после проверки.')
         return super().form_valid(form)
     
 class ThanksForReviewView(TemplateView):
