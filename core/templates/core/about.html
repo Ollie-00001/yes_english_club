@@ -7,9 +7,13 @@
     <!-- About section -->
     <div class="about-section d-flex my-5 align-items-center">
         <div class="photo-container">
-            <img src="{{ teacher.photo.url }}" 
-                alt="Фото преподавателя" 
-                class="teacher-photo d-block">
+            {% if teacher.photo %}
+                <img src="{{ teacher.photo.url }}" 
+                    alt="Фото преподавателя" 
+                    class="teacher-photo d-block">
+            {% else %}
+                <p>Нет фото</p>
+            {% endif %}
         </div>
 
         <div class="info-container d-flex flex-column align-items-center text-center">
