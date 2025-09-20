@@ -7,7 +7,7 @@ class Request(models.Model):
     client_name = models.CharField(max_length=100, verbose_name='Имя клиента')
     email = models.EmailField(verbose_name='Почта')
     phone_number = PhoneNumberField(region='RU', null=True, blank=False, verbose_name='Номер телефона')
-    message = models.TextField(verbose_name='Сообщение', blank=True)
+    message = models.TextField(verbose_name='Сообщение', blank=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания заявки')
 
     class Meta:

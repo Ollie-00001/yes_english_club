@@ -33,6 +33,9 @@
                 {% endif %}
             {% endfor %}
         </div>
+        {% if reviews|length == 0 %}
+            <div class="text-center">Отзывов пока нет. Чтобы стать первым, кто оставит отзыв, нажмите на кнопку ниже!</div>
+        {% endif %}
 
     <div class="pagination text-center mt-4">
         <button id="loadMoreBtn" type="button" class="btn-more btn">Ещё</button>
@@ -40,7 +43,7 @@
 
     <div class="leave-review-section mt-4">
         <p>Понравилась моя работа? — Вы тоже можете оставить свой отзыв!</p>
-        <a href="{% url 'create_review' %}" class="btn-leave-review btn">Оставить отзыв</a>
+        <a href="{% url 'create_review' %}" class="btn btn-custom">Оставить отзыв</a>
     </div>
 </div>
 {% endblock %}
