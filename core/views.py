@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from .forms import RequestForm, ReviewForm
 from .models import Request, Review, Service, Teacher, Video, GalleryImage
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
+from django.utils.dateparse import parse_date
 
 class AboutView(TemplateView):
     template_name = 'core/about.html'
@@ -41,6 +43,41 @@ class RequestView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def test_func(self):
         return self.request.user.is_staff
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        q = self.request.GET.get('q', '').strip()
+        if q:
+            qs = qs.filter(
+                Q(client_name__icontains=q) |
+                Q(email__icontains=q) |
+                Q(phone_number__icontains=q) |
+                Q(message__icontains=q)
+            )
+
+        date_from_raw = self.request.GET.get('date_from')
+        date_to_raw = self.request.GET.get('date_to')
+
+        date_from = parse_date(date_from_raw) if date_from_raw else None
+        date_to = parse_date(date_to_raw) if date_to_raw else None
+
+        if date_from:
+            qs = qs.filter(created_at__date__gte=date_from)
+        if date_to:
+            qs = qs.filter(created_at__date__lte=date_to)
+
+        sort = self.request.GET.get('sort')
+        if sort == 'oldest':
+            qs = qs.order_by('created_at')
+        else:
+            qs = qs.order_by('-created_at')
+
+        return qs
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['current_get'] = self.request.GET.urlencode()
+        return ctx
 
 class RequestDetailsView(DetailView):
     model = Request
