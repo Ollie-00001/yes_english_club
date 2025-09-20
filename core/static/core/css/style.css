@@ -661,3 +661,11 @@ h3 {
 .review-form .btn-submit:hover {
     background-color: #1d998e;
 }
+
+/* Requests Page */
+.card-text {
+    max-height: 1.5em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
