@@ -23,6 +23,7 @@ class ContactsView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['teacher'] = Teacher.objects.first()
         context["video"] = Video.objects.first()
         return context
 
