@@ -26,7 +26,7 @@ class Review(models.Model):
         (5, '5'),
     ]
 
-    client_name = models.CharField(max_length=100, blank=True, verbose_name='Имя клиента')
+    client_name = models.CharField(max_length=100, blank=False, verbose_name='Имя клиента')
     text = models.TextField(max_length=500, verbose_name='Текст отзыва')
     rating = models.PositiveSmallIntegerField(
         choices=RATING_CHOICES,
@@ -63,11 +63,12 @@ class Service(models.Model):
     
 class Teacher(models.Model):
     name = models.CharField(max_length=200, verbose_name='Имя')
+    phone_number = PhoneNumberField(region='RU', verbose_name='Номер телефона', blank=False, null=True)
+    email = models.EmailField(verbose_name='Email')
     education = models.TextField(verbose_name='Образование', blank=True)
     experience = models.CharField(max_length=100, verbose_name='Опыт работы', blank=True)
-    email = models.EmailField(verbose_name='Email')
-    photo = models.ImageField(upload_to='teacher_photos/', verbose_name='Фото', blank=True, null=True)
     description = models.TextField(verbose_name='Описание', null=True, blank=True)
+    photo = models.ImageField(upload_to='teacher_photos/', verbose_name='Фото', blank=True, null=True)
 
     def blank_description(self):
         if not self.description:
@@ -82,8 +83,8 @@ class Teacher(models.Model):
         return self.name
     
 class GalleryImage(models.Model):
-    title = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(upload_to='gallery/')
+    title = models.CharField(max_length=255, blank=True, verbose_name='Название фото')
+    image = models.ImageField(upload_to='gallery/', verbose_name='Изображение')
     order = models.PositiveIntegerField(default=0, db_index=True)
 
     class Meta:
