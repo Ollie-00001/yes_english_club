@@ -117,7 +117,7 @@ class Video(models.Model):
 
     def generate_vk_iframe(self, Autoplay=False, hd=3, use_vk_com_domain=True):
 
-        pattern = re.compile(r'https://vkvideo\.ru/video(-[0-9]+)_([0-9]+)')
+        pattern = re.compile(r'https://(?:vk\.com|vkvideo\.ru)/video(-?\d+)_(\d+)')
 
         match = pattern.search(self.original_url)
         
