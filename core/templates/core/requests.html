@@ -4,10 +4,72 @@
 {% block title %}Заявки{% endblock %}
 
 {% block content %}
-  <h1>Заявки</h1>
-  <ul>
-    {% for request in requests %}
-      <li>{{ request.client_name }} - {{ request.created_at }}</li>
-    {% endfor %}
-  </ul>
+<div class="container my-4">
+    <h1 class="mb-4">Заявки</h1>
+
+    <form method="get" class="row g-2 mb-4 align-items-end">
+        <div class="col-md-4">
+            <input type="text" name="q" value="{{ request.GET.q|default:'' }}" class="form-control" placeholder="Поиск...">
+        </div>
+        <div class="col-md-2">
+            <input type="date" name="date_from" value="{{ request.GET.date_from|default:'' }}" class="form-control">
+        </div>
+        <div class="col-md-2">
+            <input type="date" name="date_to" value="{{ request.GET.date_to|default:'' }}" class="form-control">
+        </div>
+        <div class="col-md-2">
+            <select name="sort" class="form-select">
+            <option value="">Сортировать...</option>
+            <option value="newest" {% if request.GET.sort == "newest" %}selected{% endif %}>Сначала новые</option>
+            <option value="oldest" {% if request.GET.sort == "oldest" %}selected{% endif %}>Сначала старые</option>
+            <option value="id" {% if request.GET.sort == "id" %}selected{% endif %}>По ID</option>
+            </select>
+        </div>
+        <div class="col-md-auto">
+            <button type="submit" class="btn btn-primary">Применить</button>
+        </div>
+    </form>
+
+    {% if requests %}
+        <div class="row g-3">
+        {% for request in requests %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ request.client_name }}</h5>
+                    <h6 class="text-muted small">ID: {{ request.id }}</h6>
+                    <p class="card-text text-truncate">
+                    {{ request.message }}
+                    </p>
+                    <a href="#" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#requestModal{{ request.id }}">
+                    Подробнее
+                    </a>
+                </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="requestModal{{ request.id }}" tabindex="-1" aria-labelledby="requestModalLabel{{ request.id }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="requestModalLabel{{ request.id }}">Заявка №{{ request.id }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    </div>
+                    <div class="modal-body">
+                    <p><strong>Имя:</strong> {{ request.client_name }}</p>
+                    <p><strong>Email:</strong> {{ request.email }}</p>
+                    <p><strong>Телефон:</strong> {{ request.phone_number }}</p>
+                    <p><strong>Сообщение:</strong><br>{{ request.message }}</p>
+                    <p class="text-muted"><small>Создано: {{ request.created_at }}</small></p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">Заявок пока нет.</div>
+    {% endif %}
+</div>
 {% endblock %}
