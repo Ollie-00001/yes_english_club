@@ -25,16 +25,16 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-md-6 mb-2">
-                <h3>Обкашлять вопросики</h3>
-                <p>Пишите мне в социальные сети или через форму обратной связи.</p>
+                <h3>По записи и иным вопросам</h3>
+                <p>пишите мне в социальные сети или через форму обратной связи.</p>
                 <ul class="list-unstyled">
                     <li>
                         <i class="fab fa-vk fs-3 me-1"></i>
-                        Вконтакте: <a href="https://vk.com/amantesan" target="_blank">vk.com/amantesan</a>
+                        Вконтакте: <a href="{{ teacher.vk_link }}" target="_blank">{{ teacher.vk_link_clean }}</a>
                     </li>
                     <li>
                         <i class="bi bi-instagram fs-4 me-1"></i>
-                        Instagram: <a href="https://instagram.com/_anastasia_wwww" target="_blank">instagram.com/_anastasia_wwww</a>
+                        Instagram: <a href="{{ teacher.telegram_link }}" target="_blank">{{ teacher.instagram_link_clean }}</a>
                     </li>
                 </ul>
                 <p><i class="bi bi-telegram fs-4 me-1"></i>Telegram/WhatsApp: {{ teacher.phone_number }}</p>

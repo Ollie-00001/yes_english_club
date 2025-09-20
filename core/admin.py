@@ -52,7 +52,7 @@ class ServiceAdmin(admin.ModelAdmin):
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ('name', 'education', 'experience', 'email')
+    list_display = ('name', 'phone_number', 'email')
 
 @admin.register(GalleryImage)
 class GalleryImageAdmin(SortableAdminMixin, admin.ModelAdmin):

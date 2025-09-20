@@ -2,6 +2,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.html import format_html
 import re
+from urllib.parse import urlparse
 
 class Request(models.Model):
     client_name = models.CharField(max_length=100, verbose_name='Имя клиента')
@@ -65,17 +66,35 @@ class Teacher(models.Model):
     name = models.CharField(max_length=200, verbose_name='Имя')
     phone_number = PhoneNumberField(region='RU', verbose_name='Номер телефона', blank=False, null=True)
     email = models.EmailField(verbose_name='Email')
-    description = models.TextField(verbose_name='Описание', null=True, blank=True)
-    vk_link = models.URLField(verbose_name='Ссылка на VK', blank=True, null=True)
-    telegram_link = models.URLField(verbose_name='Ссылка на Telegram', blank=True, null=True)
-    instagram_link = models.URLField(verbose_name='Ссылка на Instagram', blank=True, null=True)
-    photo = models.ImageField(upload_to='teacher_photos/', verbose_name='Фото', blank=True, null=True)
+    description = models.TextField(verbose_name='Описание', null=True, blank=False)
+    vk_link = models.URLField(verbose_name='Ссылка на VK')
+    telegram_link = models.URLField(verbose_name='Ссылка на Telegram')
+    instagram_link = models.URLField(verbose_name='Ссылка на Instagram')
+    photo = models.ImageField(upload_to='teacher_photos/', verbose_name='Фото', blank=False, null=True)
 
     def blank_description(self):
         if not self.description:
             return ""
         return self.description
 
+    def clean_url(self, url: str) -> str:
+        if not url:
+            return ""
+        parsed = urlparse(url)
+        return parsed.netloc + parsed.path
+
+    @property
+    def vk_link_clean(self) -> str:
+        return self.clean_url(self.vk_link)
+
+    @property
+    def telegram_link_clean(self) -> str:
+        return self.clean_url(self.telegram_link)
+
+    @property
+    def instagram_link_clean(self) -> str:
+        return self.clean_url(self.instagram_link)
+    
     class Meta:
         verbose_name = 'Преподаватель'
         verbose_name_plural = 'Преподаватели'
