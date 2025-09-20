@@ -603,20 +603,6 @@ h3 {
     font-size: 1.1em;
 }
 
-.btn-leave-review {
-    display: inline-block;
-    background-color: #20b2aa;
-    color: #fff;
-    padding: 12px 25px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.btn-leave-review:hover {
-    background-color: #1d998e;
-}
-
 .no-reviews {
     text-align: center;
     color: #777;
