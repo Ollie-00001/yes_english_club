@@ -65,9 +65,10 @@ class Teacher(models.Model):
     name = models.CharField(max_length=200, verbose_name='Имя')
     phone_number = PhoneNumberField(region='RU', verbose_name='Номер телефона', blank=False, null=True)
     email = models.EmailField(verbose_name='Email')
-    education = models.TextField(verbose_name='Образование', blank=True)
-    experience = models.CharField(max_length=100, verbose_name='Опыт работы', blank=True)
     description = models.TextField(verbose_name='Описание', null=True, blank=True)
+    vk_link = models.URLField(verbose_name='Ссылка на VK', blank=True, null=True)
+    telegram_link = models.URLField(verbose_name='Ссылка на Telegram', blank=True, null=True)
+    instagram_link = models.URLField(verbose_name='Ссылка на Instagram', blank=True, null=True)
     photo = models.ImageField(upload_to='teacher_photos/', verbose_name='Фото', blank=True, null=True)
 
     def blank_description(self):
