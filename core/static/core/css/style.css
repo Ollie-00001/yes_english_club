@@ -379,7 +379,7 @@ h3 {
 .price-section .price-card:hover .icon-circle {
     transform: rotateY(360deg);
     transition: all 1s ease;
-    box-shadow: 0 12px 32px rgba(255, 238, 206, 0.5);
+    box-shadow: 0 12px 32px #ffeece80;
 }
 
 .price-section .price {
@@ -387,7 +387,7 @@ h3 {
     font-weight: 700;
     font-size: 2rem;
     margin-bottom: 16px;
-    text-shadow: 0 2px 4px rgba(212, 59, 59, 0.2);
+    text-shadow: 0 2px 4px #d43b3b33;
     position: relative;
 }
 
@@ -654,4 +654,55 @@ h3 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+/* Scroll Top Button */
+.scrollTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #1d998e;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.scrollTopBtn:hover {
+    background-color: #005669ff;
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+}
+
+.scrollTopBtn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scrollTopBtn i {
+    font-size: 20px;
+    color: white;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scrollTopBtn.show {
+    animation: fadeInUp 0.3s ease;
 }

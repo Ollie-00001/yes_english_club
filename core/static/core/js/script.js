@@ -109,3 +109,104 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Scroll to top button
+// Получаем кнопку
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+// Функция для поиска скроллящегося элемента
+function findScrollableElement() {
+    // Проверяем разные варианты скроллящихся элементов
+    const candidates = [
+        document.documentElement, // html
+        document.body, // body
+        document.querySelector('.main'), // возможный main контейнер
+        document.querySelector('.container'), // возможный контейнер
+        document.querySelector('[data-scroll]'), // элемент с data-scroll
+        ...document.querySelectorAll('*') // все элементы (в крайнем случае)
+    ];
+
+    for (let element of candidates) {
+        if (element && (element.scrollTop > 0 || element.scrollHeight > element.clientHeight)) {
+            console.log('Found scrollable element:', element);
+            return element;
+        }
+    }
+    
+    return window; // fallback
+}
+
+// Находим скроллящийся элемент
+let scrollElement = findScrollableElement();
+
+// Функция для получения позиции скролла
+function getScrollPosition() {
+    if (scrollElement === window) {
+        return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    } else {
+        return scrollElement.scrollTop;
+    }
+}
+
+// Функция для показа/скрытия кнопки
+function toggleScrollTopBtn() {
+    const scrollPos = getScrollPosition();
+    console.log('Scroll position:', scrollPos, 'Element:', scrollElement); // Отладка
+    
+    if (scrollPos > 300) {
+        scrollTopBtn.classList.add('show');
+        console.log('Button should be visible'); // Отладка
+    } else {
+        scrollTopBtn.classList.remove('show');
+        console.log('Button should be hidden'); // Отладка
+    }
+}
+
+// Функция плавного скролла наверх
+function scrollToTop(e) {
+    e.preventDefault();
+    
+    if (scrollElement === window) {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    } else {
+        scrollElement.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Универсальная функция для добавления слушателя скролла
+function addScrollListener() {
+    // Пробуем разные элементы
+    const elementsToListen = [window, document, document.documentElement, document.body];
+    
+    // Также ищем все потенциально скроллящиеся элементы
+    const scrollableElements = Array.from(document.querySelectorAll('*')).filter(el => {
+        const style = window.getComputedStyle(el);
+        return style.overflow === 'auto' || style.overflow === 'scroll' || 
+                style.overflowY === 'auto' || style.overflowY === 'scroll';
+    });
+    
+    elementsToListen.push(...scrollableElements);
+    
+    elementsToListen.forEach(element => {
+        if (element) {
+            element.addEventListener('scroll', toggleScrollTopBtn);
+            console.log('Added scroll listener to:', element);
+        }
+    });
+}
+
+// Слушатели событий
+addScrollListener();
+scrollTopBtn.addEventListener('click', scrollToTop);
+
+// Проверяем при загрузке страницы
+setTimeout(() => {
+    scrollElement = findScrollableElement();
+    toggleScrollTopBtn();
+}, 100);
