@@ -4,38 +4,39 @@
 {% block title %}Отзывы{% endblock %}
 
 {% block content %}
-<div class="reviews-container py-lg-5">
+<div class="reviews-container py-5 py-lg-5">
     <h1 class="reviews-title text-center mb-5">Отзывы моих учеников</h1>
 
-        <div class="reviews-grid" id="reviewsGrid" data-initial="4">
-            {% for review in reviews %}
-                {% if review.is_published %}
-                <div class="review-card">
-                    <div class="review-card-header mb-2">
-                        <div class="review-card-info">
-                            <span class="client-name">{{ review.client_name }}</span>
-                            <small class="text-muted">{{ review.created_at|date:"j F Y года" }}</small>
-                        </div>
-                        <div class="star-rating">
-                            {% for i in "12345" %}
-                                {% if forloop.counter <= review.rating %}
-                                    <span class="star">&#9733;</span>
-                                {% else %}
-                                    <span class="star empty">&#9734;</span>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
+    <div class="reviews-grid" id="reviewsGrid" data-initial="4">
+        {% for review in reviews %}
+            {% if review.is_published %}
+            <div class="review-card col-12 col-md-6">
+                <div class="review-card-header mb-2">
+                    <div class="review-card-info">
+                        <span class="client-name">{{ review.client_name }}</span>
+                        <small class="text-muted">{{ review.created_at|date:"j F Y года" }}</small>
                     </div>
-
-                    <p class="review-text clamp">{{ review.text }}</p>
-                    <button class="btn-toggle-text">Развернуть</button>
+                    <div class="star-rating">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= review.rating %}
+                                <span class="star">&#9733;</span>
+                            {% else %}
+                                <span class="star empty">&#9734;</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-        {% if reviews|length == 0 %}
-            <div class="text-center">Отзывов пока нет. Чтобы стать первым, кто оставит отзыв, нажмите на кнопку ниже!</div>
-        {% endif %}
+
+                <p class="review-text clamp">{{ review.text }}</p>
+                <button class="btn-toggle-text">Развернуть</button>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% if reviews|length == 0 %}
+        <div class="text-center">Отзывов пока нет. Чтобы стать первым, кто оставит отзыв, нажмите на кнопку ниже!</div>
+    {% endif %}
 
     <div class="pagination text-center mt-4">
         <button id="loadMoreBtn" type="button" class="btn-more btn">Ещё</button>
