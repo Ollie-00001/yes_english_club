@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnLeft = wrapper.querySelector('.thumb-nav.left');
     const btnRight = wrapper.querySelector('.thumb-nav.right');
 
+    if (thumbImages.length === 0) {
+      return;
+    }
+
     const VISIBLE = 5;
     let activeIndex = 0;
     let offset = 0;
@@ -86,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Review text toggle btn
 document.addEventListener('DOMContentLoaded', () => {
     const reviewCards = document.querySelectorAll('.review-card');
 
