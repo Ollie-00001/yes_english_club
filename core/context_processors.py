@@ -6,7 +6,6 @@ def menu_items(request):
         {'title': 'Стоимость', 'url_name': 'home', 'anchor': 'services', 'icon': 'bi bi-cash'},
         {'title': 'Контакты', 'url_name': 'contacts', 'anchor': '', 'icon': 'bi bi-phone'},
         {'title': 'Отзывы', 'url_name': 'reviews', 'anchor': '', 'icon': 'bi bi-award'},
-        {'title': 'Расписание', 'url_name': 'schedule', 'anchor': '', 'icon': 'bi bi-calendar-week'},
     ]
 
     admin_menu = []
