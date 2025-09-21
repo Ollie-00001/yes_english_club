@@ -111,19 +111,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Scroll to top button
-// Получаем кнопку
 const scrollTopBtn = document.getElementById('scrollTopBtn');
 
-// Функция для поиска скроллящегося элемента
 function findScrollableElement() {
-    // Проверяем разные варианты скроллящихся элементов
     const candidates = [
-        document.documentElement, // html
-        document.body, // body
-        document.querySelector('.main'), // возможный main контейнер
-        document.querySelector('.container'), // возможный контейнер
-        document.querySelector('[data-scroll]'), // элемент с data-scroll
-        ...document.querySelectorAll('*') // все элементы (в крайнем случае)
+        document.documentElement,
+        document.body,
+        document.querySelector('.main'),
+        document.querySelector('.container'),
+        document.querySelector('[data-scroll]'),
+        ...document.querySelectorAll('*')
     ];
 
     for (let element of candidates) {
@@ -133,13 +130,11 @@ function findScrollableElement() {
         }
     }
     
-    return window; // fallback
+    return window;
 }
 
-// Находим скроллящийся элемент
 let scrollElement = findScrollableElement();
 
-// Функция для получения позиции скролла
 function getScrollPosition() {
     if (scrollElement === window) {
         return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
@@ -148,21 +143,17 @@ function getScrollPosition() {
     }
 }
 
-// Функция для показа/скрытия кнопки
 function toggleScrollTopBtn() {
     const scrollPos = getScrollPosition();
-    console.log('Scroll position:', scrollPos, 'Element:', scrollElement); // Отладка
+    console.log('Scroll position:', scrollPos, 'Element:', scrollElement);
     
     if (scrollPos > 300) {
         scrollTopBtn.classList.add('show');
-        console.log('Button should be visible'); // Отладка
     } else {
         scrollTopBtn.classList.remove('show');
-        console.log('Button should be hidden'); // Отладка
     }
 }
 
-// Функция плавного скролла наверх
 function scrollToTop(e) {
     e.preventDefault();
     
@@ -179,12 +170,9 @@ function scrollToTop(e) {
     }
 }
 
-// Универсальная функция для добавления слушателя скролла
 function addScrollListener() {
-    // Пробуем разные элементы
     const elementsToListen = [window, document, document.documentElement, document.body];
     
-    // Также ищем все потенциально скроллящиеся элементы
     const scrollableElements = Array.from(document.querySelectorAll('*')).filter(el => {
         const style = window.getComputedStyle(el);
         return style.overflow === 'auto' || style.overflow === 'scroll' || 
@@ -201,11 +189,9 @@ function addScrollListener() {
     });
 }
 
-// Слушатели событий
 addScrollListener();
 scrollTopBtn.addEventListener('click', scrollToTop);
 
-// Проверяем при загрузке страницы
 setTimeout(() => {
     scrollElement = findScrollableElement();
     toggleScrollTopBtn();
