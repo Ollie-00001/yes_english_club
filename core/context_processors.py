@@ -1,4 +1,4 @@
-from .models import Logo
+from .models import Teacher, Logo
 
 def menu_items(request):
     user_menu = [
@@ -17,6 +17,11 @@ def menu_items(request):
     return {
         'user_menu': user_menu,
         'admin_menu': admin_menu,
+    }
+
+def teacher_context(request):
+    return {
+        'teacher': Teacher.objects.first()
     }
 
 def logo_context(request):
