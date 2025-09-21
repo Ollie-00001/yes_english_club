@@ -5,12 +5,12 @@
 
 {% block content %}
     <!-- About section -->
-    <div class="about-section d-flex my-5 align-items-center">
+    <div class="about-section d-flex flex-column my-5 align-items-center">
         <div class="photo-container">
             {% if teacher.photo %}
                 <img src="{{ teacher.photo.url }}" 
                     alt="Фото преподавателя" 
-                    class="teacher-photo d-block">
+                    class="teacher-photo img-fluid d-block">
             {% else %}
                 <p>Нет фото</p>
             {% endif %}
@@ -27,8 +27,8 @@
 
         <div class="d-flex flex-column gap-4 align-items-center">
 
-            <div class="d-flex justify-content-center gap-5 flex-wrap">
-                <div class="info-card d-flex gap-3 p-2">
+            <div class="d-flex justify-content-center flex-wrap">
+                <div class="info-card d-flex gap-3 p-2 me-3 mb-3">
                     <i class="bi bi-people-fill fs-1 flex-shrink-0"></i>
                     <div class="text-wrapper d-flex flex-column justify-content-center">
                         <h3 class="info-card-title m-0">Индивидуальный подход</h3>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                <div class="info-card d-flex gap-3 p-2">
+                <div class="info-card d-flex gap-3 p-2 me-3 mb-3">
                     <i class="bi bi-clock fs-1 flex-shrink-0"></i>
                     <div class="text-wrapper d-flex flex-column justify-content-center">
                         <h3 class="info-card-title m-0">Гибкий график</h3>
@@ -49,8 +49,8 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center gap-5 flex-wrap">
-                <div class="info-card d-flex gap-3 p-2">
+            <div class="d-flex justify-content-center flex-wrap">
+                <div class="info-card d-flex gap-3 p-2 me-3 mb-3">
                     <i class="bi bi-journal-text fs-1 flex-shrink-0"></i>
                     <div class="text-wrapper d-flex flex-column justify-content-center">
                         <h3 class="info-card-title m-0">Современные материалы</h3>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
 
-                <div class="info-card d-flex gap-3 p-2">
+                <div class="info-card d-flex gap-3 p-2 me-3 mb-3">
                     <i class="bi bi-award-fill fs-1 flex-shrink-0"></i>
                     <div class="text-wrapper d-flex flex-column justify-content-center">
                         <h3 class="info-card-title m-0">Высокий уровень</h3>
@@ -77,62 +77,62 @@
     <div class="section-default py-lg-5">
         <h2 class="section-title mb-5 text-center">Как проходит занятие</h2>
 
-        <div class="d-flex flex-row align-items-stretch flex-wrap flex-md-nowrap">
-            <div class="text-column md-3 flex-shrink-0 col-md-6">
-                <div class="text-block me-0 me-md-5">
-                    <h3 class="mb-3">
+        <div class="row align-items-start">
+            <div class="text-column col-12 col-md-6 mb-4 mb-md-0">
+                <div class="text-block">
+                    <h3 class="mb-3 text-center">
                         Продуманная структура занятия позволяет достигать более высоких результатов у учеников.
                     </h3>
 
-                    <h3 class="mb-1">
+                    <h3 class="mb-1 d-flex justify-content-center align-items-center">
                         <i class="bi bi-1-circle me-2"></i>Warm-up
                     </h3>
-                    <p class="info-card-text mb-2">
+                    <p class="info-card-text mb-2 text-center">
                         Скороговорки, краткое обсуждение различных тем, интерактивные игры на иностранном языке в начале урока помогают настроиться на дальнейшую продуктивную работу.
                     </p>
 
-                    <h3 class="mb-1">
+                    <h3 class="mb-1 d-flex justify-content-center align-items-center">
                         <i class="bi bi-2-circle-fill me-2"></i>Проверка домашнего задания
                     </h3>
-                    <p class="info-card-text mb-2">
+                    <p class="info-card-text mb-2 text-center">
                         На этом этапе мы анализируем, как был усвоен предыдущий материал. Вы можете задать вопросы, которые возникли при выполнении домашнего задания. После мы вместе проверим правильность его решения и определим, над чем нужно дополнительно поработать. 
                     </p>
 
-                    <h3 class="mb-1">
+                    <h3 class="mb-1 d-flex justify-content-center align-items-center">
                         <i class="bi bi-3-circle me-2"></i>Новая тема
                     </h3>
-                    <p class="info-card-text mb-2">
+                    <p class="info-card-text mb-2 text-center">
                         Разбираем новую тему по учебной программе. Сначала теория - потом много-много практики, чтобы закрепить пройденный материал. На этом этапе используем различные материалы, интерактивные игры и делаем упор на все аспекты языка. 
                     </p>
 
-                    <h3 class="mb-1">
+                    <h3 class="mb-1 d-flex justify-content-center align-items-center">
                         <i class="bi bi-4-circle-fill me-2"></i>Завершение и рефлексия
                     </h3>
-                    <p class="info-card-text mb-2">
+                    <p class="info-card-text mb-2 text-center">
                         Подводим итоги урока вместе с учеником. Обсуждаем, что нового узнали на уроке, что было самым интересным, какой вопрос остался открытым. В конце - обсуждается новое домашнее задание
                     </p>
                 </div>
             </div>
 
-            <div class="image-column col-md-6 d-flex flex-column">
-                <div class="image-preview d-flex align-items-center justify-content-center">
-                    <img id="preview-img" src="" alt="Превью" class="class-structure-image object-fit-contain">
+            <div class="image-column col-12 col-md-6 d-flex flex-column align-items-center">
+                <div class="image-preview d-flex align-items-center justify-content-center mb-3">
+                    <img id="preview-img" src="" alt="Превью" class="class-structure-image img-fluid">
                 </div>
 
-                <div class="image-thumbnails-wrapper">
-                <button class="thumb-nav left" aria-label="prev slide" type="button"><i class="bi bi-arrow-bar-left"></i></button>
+                <div class="image-thumbnails-wrapper d-flex align-items-center justify-content-center w-100">
+                    <button class="thumb-nav left" aria-label="prev slide" type="button"><i class="bi bi-arrow-bar-left"></i></button>
 
-                <div class="image-thumbnails-viewport">
-                    <div class="image-thumbnails">
-                        {% for img in gallery_images %}
-                        <a href="#" class="thumb">
-                            <img src="{{ img.image.url }}" alt="{{ img.title }}">
-                        </a>
-                        {% endfor %}
+                    <div class="image-thumbnails-viewport mx-2">
+                        <div class="image-thumbnails d-flex">
+                            {% for img in gallery_images %}
+                            <a href="#" class="thumb">
+                                <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-fluid">
+                            </a>
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
 
-                <button class="thumb-nav right" aria-label="next slide" type="button"><i class="bi bi-arrow-bar-right"></i></button>
+                    <button class="thumb-nav right" aria-label="next slide" type="button"><i class="bi bi-arrow-bar-right"></i></button>
                 </div>
             </div>
         </div>
@@ -144,7 +144,7 @@
             <h2 class="section-title text-center mb-5">СТОИМОСТЬ ЗАНЯТИЙ</h2>
             <div class="row justify-content-center">
 
-                <div class="col-md-3 text-center">
+                <div class="col-md-3 col-12 mb-4 text-center">
                     <div class="price-card h-100">
                         <div class="icon-wrapper mb-3">
                             <div class="icon-circle mx-auto mb-2">
@@ -159,7 +159,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 text-center">
+                <div class="col-md-3 col-12 mb-4 text-center">
                     <div class="price-card h-100">
                         <div class="icon-wrapper mb-3">
                             <div class="icon-circle mx-auto mb-2">
@@ -174,7 +174,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 text-center">
+                <div class="col-md-3 col-12 mb-4 text-center">
                     <div class="price-card h-100">
                         <div class="icon-wrapper mb-3">
                             <div class="icon-circle mx-auto mb-2">
