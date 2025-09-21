@@ -4,7 +4,7 @@
 {% block title %}Заявки{% endblock %}
 
 {% block content %}
-<div class="container py-lg-5">
+<div class="container py-5 requests-section">
     <h1 class="mb-4">Заявки</h1>
 
     <form method="get" class="row g-2 mb-4 align-items-end">
@@ -19,10 +19,10 @@
         </div>
         <div class="col-md-2">
             <select name="sort" class="form-select">
-            <option value="">Сортировать...</option>
-            <option value="newest" {% if request.GET.sort == "newest" %}selected{% endif %}>Сначала новые</option>
-            <option value="oldest" {% if request.GET.sort == "oldest" %}selected{% endif %}>Сначала старые</option>
-            <option value="id" {% if request.GET.sort == "id" %}selected{% endif %}>По ID</option>
+                <option value="">Сортировать...</option>
+                <option value="newest" {% if request.GET.sort == "newest" %}selected{% endif %}>Сначала новые</option>
+                <option value="oldest" {% if request.GET.sort == "oldest" %}selected{% endif %}>Сначала старые</option>
+                <option value="id" {% if request.GET.sort == "id" %}selected{% endif %}>По ID</option>
             </select>
         </div>
         <div class="col-md-auto">
@@ -31,9 +31,8 @@
     </form>
 
     {% if requests %}
-        <div class="row g-3">
-        {% for request in requests %}
-            <div class="col-md-4 mb-4">
+        <div class="requests-grid">
+            {% for request in requests %}
                 <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">{{ request.client_name }}</h5>
@@ -42,31 +41,30 @@
                             {{ request.message|default:"—" }}
                         </p>
                         <a href="#" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#requestModal{{ request.id }}">
-                        Подробнее
+                            Подробнее
                         </a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="requestModal{{ request.id }}" tabindex="-1" aria-labelledby="requestModalLabel{{ request.id }}" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="requestModalLabel{{ request.id }}">Заявка №{{ request.id }}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p><strong>Имя:</strong> {{ request.client_name }}</p>
-                            <p><strong>Email:</strong> {{ request.email }}</p>
-                            <p><strong>Телефон:</strong> {{ request.phone_number }}</p>
-                            <p><strong>Сообщение:</strong><br>{{ request.message }}</p>
-                            <p class="text-muted"><small>Создано: {{ request.created_at }}</small></p>
+                <!-- Modal -->
+                <div class="modal fade" id="requestModal{{ request.id }}" tabindex="-1" aria-labelledby="requestModalLabel{{ request.id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="requestModalLabel{{ request.id }}">Заявка №{{ request.id }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Имя:</strong> {{ request.client_name }}</p>
+                                <p><strong>Email:</strong> {{ request.email }}</p>
+                                <p><strong>Телефон:</strong> {{ request.phone_number }}</p>
+                                <p><strong>Сообщение:</strong><br>{{ request.message }}</p>
+                                <p class="text-muted"><small>Создано: {{ request.created_at }}</small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
         </div>
     {% else %}
         <p class="requests-empty">Заявок пока нет.</p>

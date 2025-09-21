@@ -1,36 +1,26 @@
-<nav class="navbar navbar-expand-lg navbar-light py-0" style="background-color: #20b2aa;">
-  <div class="container">
+<nav class="navbar navbar-light py-0">
+  <div class="container d-flex justify-content-between">
 
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex gap-3">
+    <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
       {% for item in user_menu %}
         <li class="nav-item">
-          {% if item.url_name %}
-            <a class="nav-link text-white fw-semibold d-flex align-items-center"
-               href="{% url item.url_name %}{% if item.anchor %}#{{ item.anchor }}{% endif %}">
-          {% elif item.anchor %}
-            <a class="nav-link text-white fw-semibold d-flex align-items-center"
-               href="#{{ item.anchor }}">
-          {% else %}
-            <a class="nav-link text-white fw-semibold d-flex align-items-center" href="/">
-          {% endif %}
-              <i class="{{ item.icon }} me-1"></i> {{ item.title }}
-            </a>
+          <a class="nav-link text-white fw-semibold d-flex align-items-center"
+             href="{% if item.url_name %}{% url item.url_name %}{% if item.anchor %}#{{ item.anchor }}{% endif %}{% elif item.anchor %}#{{ item.anchor }}{% else %}/{% endif %}">
+            <i class="{{ item.icon }} me-0 me-lg-1"></i>
+            <span class="d-none d-lg-inline">{{ item.title }}</span>
+          </a>
         </li>
       {% endfor %}
     </ul>
 
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 d-flex gap-3">
+    <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
       {% for item in admin_menu %}
         <li class="nav-item">
-          {% if item.url %}
-            <a class="nav-link text-white fw-semibold d-flex align-items-center" href="{% url item.url %}">
-              <i class="{{ item.icon }} me-1"></i> {{ item.title }}
-            </a>
-          {% else %}
-            <a class="nav-link text-white fw-semibold d-flex align-items-center" href="#">
-              <i class="{{ item.icon }} me-1"></i> {{ item.title }}
-            </a>
-          {% endif %}
+          <a class="nav-link text-white fw-semibold d-flex align-items-center"
+             href="{% if item.url %}{% url item.url %}{% else %}#{% endif %}">
+            <i class="{{ item.icon }} me-0 me-lg-1"></i>
+            <span class="d-none d-lg-inline">{{ item.title }}</span>
+          </a>
         </li>
       {% endfor %}
     </ul>

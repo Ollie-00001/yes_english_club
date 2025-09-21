@@ -726,6 +726,18 @@ h3 {
 }
 
 /* Requests Page */
+.requests-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.requests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+
 .card-text {
     max-height: 1.5em;
     overflow: hidden;
