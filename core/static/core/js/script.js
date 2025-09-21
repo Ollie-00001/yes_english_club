@@ -98,15 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const text = card.querySelector('.review-text');
         const btn = card.querySelector('.btn-toggle-text');
 
-        const maxHeight = parseInt(getComputedStyle(text).lineHeight) * 3;
+        const maxHeight = text.clientHeight;
+
         if (text.scrollHeight > maxHeight) {
             btn.style.display = 'inline-block';
-        }
 
-        btn.addEventListener('click', () => {
-            text.classList.toggle('clamp');
-            btn.textContent = text.classList.contains('clamp') ? 'Развернуть' : 'Скрыть';
-        });
+            btn.addEventListener('click', () => {
+                text.classList.toggle('clamp');
+                btn.textContent = text.classList.contains('clamp') ? 'Развернуть' : 'Скрыть';
+            });
+        } else {
+            btn.style.display = 'none';
+        }
     });
 });
 
