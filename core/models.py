@@ -28,7 +28,7 @@ class Review(models.Model):
     ]
 
     client_name = models.CharField(max_length=100, blank=False, verbose_name='Имя клиента')
-    text = models.TextField(max_length=500, verbose_name='Текст отзыва')
+    text = models.TextField(max_length=500, verbose_name='Текст отзыва', blank=True)
     rating = models.PositiveSmallIntegerField(
         choices=RATING_CHOICES,
         verbose_name='Оценка',
