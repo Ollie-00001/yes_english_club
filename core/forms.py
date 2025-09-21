@@ -9,7 +9,8 @@ class RequestForm(forms.ModelForm):
         label='',
         widget=forms.TextInput(attrs={
             'placeholder': 'Телефон',
-            'class': 'form-control'
+            'class': 'form-control',
+            'autocomplete': 'tel'
         })
     )
 
@@ -25,16 +26,19 @@ class RequestForm(forms.ModelForm):
         widgets = {
             'client_name': forms.TextInput(attrs={
                 'placeholder': 'Ваше имя',
-                'class': 'form-control'
+                'class': 'form-control',
+                'autocomplete': 'name'
             }),
             'email': forms.EmailInput(attrs={
                 'placeholder': 'E-mail',
-                'class': 'form-control'
+                'class': 'form-control',
+                'autocomplete': 'email'
             }),
             'message': forms.Textarea(attrs={
                 'placeholder': 'Сообщение',
                 'rows': 5,
-                'class': 'form-control'
+                'class': 'form-control',
+                'autocomplete': 'off'
             }),
         }
 
