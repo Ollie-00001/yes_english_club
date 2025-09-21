@@ -35,35 +35,35 @@
         {% for request in requests %}
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">{{ request.client_name }}</h5>
-                    <h6 class="text-muted small">ID: {{ request.id }}</h6>
-                    <p class="card-text text-truncate">
-                    {{ request.message }}
-                    </p>
-                    <a href="#" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#requestModal{{ request.id }}">
-                    Подробнее
-                    </a>
-                </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ request.client_name }}</h5>
+                        <h6 class="text-muted small">ID: {{ request.id }}</h6>
+                        <p class="card-text text-truncate">
+                            {{ request.message|default:"—" }}
+                        </p>
+                        <a href="#" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#requestModal{{ request.id }}">
+                        Подробнее
+                        </a>
+                    </div>
                 </div>
             </div>
 
             <!-- Modal -->
             <div class="modal fade" id="requestModal{{ request.id }}" tabindex="-1" aria-labelledby="requestModalLabel{{ request.id }}" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="requestModalLabel{{ request.id }}">Заявка №{{ request.id }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="requestModalLabel{{ request.id }}">Заявка №{{ request.id }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Имя:</strong> {{ request.client_name }}</p>
+                            <p><strong>Email:</strong> {{ request.email }}</p>
+                            <p><strong>Телефон:</strong> {{ request.phone_number }}</p>
+                            <p><strong>Сообщение:</strong><br>{{ request.message }}</p>
+                            <p class="text-muted"><small>Создано: {{ request.created_at }}</small></p>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <p><strong>Имя:</strong> {{ request.client_name }}</p>
-                        <p><strong>Email:</strong> {{ request.email }}</p>
-                        <p><strong>Телефон:</strong> {{ request.phone_number }}</p>
-                        <p><strong>Сообщение:</strong><br>{{ request.message }}</p>
-                        <p class="text-muted"><small>Создано: {{ request.created_at }}</small></p>
-                    </div>
-                </div>
                 </div>
             </div>
         {% endfor %}
