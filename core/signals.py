@@ -8,6 +8,7 @@ def notify_new_request(sender, instance, created, **kwargs):
     if created:
         text = (
             f"*У тебя новая заявка!*\n"
+            f"*№ заявки:* {instance.id}\n"
             f"*Имя клиента:* {instance.client_name}\n"
             f"*E-mail:* {instance.email}\n"
             f"*Телефон:* {instance.phone_number or 'Не указан'}\n"
